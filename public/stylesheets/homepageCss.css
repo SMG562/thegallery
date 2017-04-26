@@ -1,0 +1,79 @@
+body{
+/*  padding-top: 160px;*/
+}
+
+
+.contentList {
+/*  padding-top: 160px;*/
+margin: 50px;
+}
+
+.navbar {
+	margin-top: 20px;
+}
+
+.navbar-brand {
+	font-size: 25px;
+	font-family: palatino;/*helvitica*/
+}
+
+nav li{
+	font-size: 20px;
+	font-family: palatino;/*helvitica*/
+}
+
+
+#brand{
+	font-weight: bold;
+}
+
+
+.brandList {
+/*  padding-top: 160px;*/
+margin: 50px;
+text-align: center;
+
+}
+
+
+#celebrity{
+	font-weight: bold;
+}
+
+
+.celebrityTitle{
+	margin-left: 100px;
+	margin-bottom: 50px;
+	text-align: center;
+
+}
+.celebrityList {
+margin-top: 50px;
+text-align: center;
+}
+
+.celebrity-brand-list{
+	text-align: left;
+	margin-top: 50px;
+}
+
+.labelList1 a{
+/*	margin-left: 3px;*/
+	color: black;
+
+}
+
+.labelList1 a:hover{
+
+	color: #337ab7;
+
+}
+
+footer{
+	margin-top: 30px;
+	text-align: right;
+	color:grey;
+	display: none;
+}
+
+

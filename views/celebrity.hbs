@@ -1,0 +1,93 @@
+<html>
+<head>
+	{{>head}}
+</head>
+
+<body >
+	<div class="container">
+		<!-- this part is navigation -->
+		<nav class="navbar"> <!-- navbar-fixed-top -->
+			<div class='container '> <!-- //page-header -->
+
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				     </button>
+					 <a class="navbar-brand " href="./"  >  &nbsp Celebrity and Brand </a>
+				</div>
+
+				<div class="navbar-collapse collapse">
+				     	<ul class="nav navbar-nav">
+					        <li id = 'celebrity'><a href="./celebrity">celebrity</a></li>
+					        <li><a href="./brand">brand</a></li>
+				     	</ul>
+				    	 <form class="navbar-form navbar-right">
+				        	<input type="text" class="form-control" placeholder="搜索...">
+				     	</form>
+	    		</div>
+
+			</div>
+		</nav>
+		<hr/>
+
+		<!-- this part is celebrity list -->
+
+
+		<div class="container ">
+			<div id = celebrityList class="celebrityList">
+				<p><a id = "002" onclick = "brandDirect(this)">D&G</a></p>
+				{{#each celebrityGroup}}
+				<h3>{{celebrityName}}</h3>
+				{{/each}}
+
+
+					<!-- <div class=""
+
+						<p><a id = "001" onclick = "celebrityDirect(this)">李冰冰</a></p>
+						<p><a id = "002" onclick = "celebrityDirect(this)">林心如</a></p>
+						<p><a id = "003" onclick = "celebrityDirect(this)">angelbaby</a></p>
+						<p><a id = "004" onclick = "celebrityDirect(this)">李冰冰</a></p>
+						<p><a id = "005" onclick = "celebrityDirect(this)">林心如</p>
+		
+					</div>
+ -->
+			</div>
+
+		</div>
+
+		{{>footer}}
+
+	</div>
+<script>
+
+function celebrityDirect(obj){			
+				//需要传一个obj参数
+				var celebrityId = $(obj).attr('id');
+				console.log(celebrityId);	
+				//更改对象的属性
+				// $(obj).attr('href','./OneCelebrity');		
+				$(obj).attr('href', './celebrity/'+celebrityId);
+
+				// $.post('/sendid', {celebrityId: celebrityId})
+				// .done(function(){
+				// 	alert("post success");
+				// 	console.log('post sucess!'+celebrityId);
+				// });
+				// console.log('link success');	
+
+				// $.post( " ", { name: "John", time: "2pm" })
+  		// 			.done(function( data ) {
+    // 					alert( "Data Loaded: " );
+  		// 			});
+				// console.log('post success');	
+
+			//
+		};
+</script>
+
+
+</body>
+</html>

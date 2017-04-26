@@ -1,0 +1,103 @@
+<html>
+<head>
+	{{>head}}
+</head>
+
+<body >
+	<div class="container">
+		<nav class="navbar"> <!-- navbar-fixed-top -->
+			<div class='container '> <!-- //page-header -->
+
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				     </button>
+					 <a class="navbar-brand " href="./"  >  &nbsp Celebrity and Brand </a>
+				</div>
+
+				<div class="navbar-collapse collapse">
+				     	<ul class="nav navbar-nav">
+					        <li id="celebrity"><a href="./celebrity">celebrity</a></li>
+					        <li id="brand"><a href="./brand">brand</a></li>
+				     	</ul>
+				    	 <form class="navbar-form navbar-right">
+				        	<input type="text" class="form-control" placeholder="搜索...">
+				     	</form>
+	    		</div>
+
+			</div>
+		</nav>
+		<hr/>
+
+		<div class="container">
+
+			<div id="brandList1" class="brandList">
+
+				<p><a id = "002" onclick = "brandDirect(this)">D&G</a></p>
+<!-- 				<h1>{{celebrityGroup}}</h1> -->
+				{{#each brandGroup}}
+				<h3>{{brandName}}</h3>
+				{{/each}}
+
+
+				<h1>mcm</h1>
+
+
+<!-- 
+					<p><a id = "001" onclick = "brandDirect(this)">chanel</p>
+					<p><a id = "002" onclick = "brandDirect(this)">D&G</p>
+					<p><a id = "003" onclick = "brandDirect(this)">MCM</p>
+					<p><a id = "004" onclick = "brandDirect(this)">Dior</p>
+					<p><a id = "005" onclick = "brandDirect(this)">chanel</p> -->
+			
+
+
+			</div>
+
+
+		</div>
+
+
+		{{>footer}}
+
+	</div>
+
+  	<script>
+
+		// window.onload = function(){
+		// 		var oBrands = document.getElementById('brandList1');
+		// 		var pBrands = oBrands.getElementsByTagName('p');
+		// 		// var aBrands = pBrands.getElementsByTagName('a')[0];
+		// 		alert(pBrands.getElementsByTagName('a')[0]);
+		// 		// alert(pBrands.length);
+
+		// 		for( var i=0; i<aBrands.length; i++)
+		// 		{
+		// 			aBrands[i].href = './homepage.html';
+		// 		}
+
+		// }
+
+		// $(document).ready(function() {
+		// 	$("#brandList1 p a").click(function() {
+
+		// 		this.href = './OneBrand';
+		// 		/* Act on the event */
+		// 	});
+
+		// });
+
+		function brandDirect(obj){
+			var brandId = $(obj).attr("id");
+			$(obj).attr('href', './brand/'+brandId);
+
+		}
+
+
+
+	</script>
+</body>
+</html>
