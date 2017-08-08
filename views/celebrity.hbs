@@ -16,78 +16,152 @@
 				        <span class="icon-bar"></span>
 				        <span class="icon-bar"></span>
 				     </button>
-					 <a class="navbar-brand " href="./"  >  &nbsp Celebrity and Brand </a>
+					 <a class="navbar-brand " href="./"  >  &nbsp The Gallery </a>
 				</div>
 
 				<div class="navbar-collapse collapse">
 				     	<ul class="nav navbar-nav">
-					        <li id = 'celebrity'><a href="./celebrity">celebrity</a></li>
-					        <li><a href="./brand">brand</a></li>
+					        <li id = 'celebrity'><a href="./celebrity">people</a></li>
+<!-- 					        <li><a href="./brand">brand</a></li> -->
 				     	</ul>
-				    	 <form class="navbar-form navbar-right">
-				        	<input type="text" class="form-control" placeholder="搜索...">
+				    	 <form class="navbar-form navbar-right" action="/search" method="post">
+				        	<input class="form-control" type="text" name="search_people" placeholder="搜索...">
 				     	</form>
 	    		</div>
 
 			</div>
 		</nav>
 		<hr/>
+		<!-- this part is add a celebrity  -->
 
-		<!-- this part is celebrity list -->
+		<div class = "row">
+			<div class="col-md-2 col-lg-2">
+
+			</div>
+			<div class="col-md-8 col-lg-8">
+			&nbsp
+
+			</div>
+			<div class="col-md-2 col-lg-2">
+				<div id="addArea">
+					<a id="addButton">添加</a>
+				</div>
+			</div>
+		</div>
 
 
-		<div class="container ">
-			<div id = celebrityList class="celebrityList">
-				<p><a id = "002" onclick = "brandDirect(this)">D&G</a></p>
+		<div id="addFormDiv" style="display: none">
+			<form id="addForm" class="container">
+				<div  id="addAreaFull" class = "form-group">
+					 <input type="text" class="form-control" id="celebrityInput" placeholder="celebrityname">
+					  <a type="submit" class="btn btn-default form-control" id="celebrityAddButton" >  添加 </a>
+					  <a type="submit" class="btn btn-link form-control" id="cancleAdd1">取消</a>
+
+					  <div class="alert alert-danger form-control" style="display: none"></div>
+  					  <div class="alert alert-success1" style="display: none"></div>
+				</div>
+
+			</form>
+
+		</div>
+
+
+
+			<!-- this part is celebrity list -->
+
+		<div class="container">
+			<div id = "celebrityListId" class="celebrityList">
+
 				{{#each celebrityGroup}}
-				<h3>{{celebrityName}}</h3>
+				<p><a id = "{{id}}" class="celebrityListOne" href="./celebrity/{{id}}" >{{celebrityName}}</a></p>
+							<!-- 一开始用的方法是：onclick = "celebrityDirect(this)" -->
 				{{/each}}
 
-
-					<!-- <div class=""
-
-						<p><a id = "001" onclick = "celebrityDirect(this)">李冰冰</a></p>
-						<p><a id = "002" onclick = "celebrityDirect(this)">林心如</a></p>
-						<p><a id = "003" onclick = "celebrityDirect(this)">angelbaby</a></p>
-						<p><a id = "004" onclick = "celebrityDirect(this)">李冰冰</a></p>
-						<p><a id = "005" onclick = "celebrityDirect(this)">林心如</p>
-		
-					</div>
- -->
 			</div>
 
 		</div>
 
-		{{>footer}}
+
+<!-- 		{{>footer}} -->
 
 	</div>
+
+
+	<!-- 点击celebrity名称，跳转至celebrity页 -->
 <script>
 
-function celebrityDirect(obj){			
-				//需要传一个obj参数
-				var celebrityId = $(obj).attr('id');
-				console.log(celebrityId);	
-				//更改对象的属性
-				// $(obj).attr('href','./OneCelebrity');		
-				$(obj).attr('href', './celebrity/'+celebrityId);
+$(document).ready(function(){
+	$('.celebrityListOne').click(function(){
+		var celebrityId = $(this).attr('id');
+		var celebrityText = $(this).text();
+		console.log('celebrityId start post:');
+		console.log(celebrityId);
 
-				// $.post('/sendid', {celebrityId: celebrityId})
-				// .done(function(){
-				// 	alert("post success");
-				// 	console.log('post sucess!'+celebrityId);
-				// });
-				// console.log('link success');	
+		//更改对象的属性
+		// $(obj).attr('href','./OneCelebrity');
+		$(this).attr('href', './celebrity/'+celebrityId);
+	});
+})
 
-				// $.post( " ", { name: "John", time: "2pm" })
-  		// 			.done(function( data ) {
-    // 					alert( "Data Loaded: " );
-  		// 			});
-				// console.log('post success');	
-
-			//
-		};
 </script>
 
+
+<script>
+
+//添加celebrity button click
+	$('#addButton').click(function(){
+		$(this).hide();
+		$('#addFormDiv').show();
+
+	})
+
+
+// 取消添加celebrity
+	$('#cancleAdd1').click(function(){
+		$('#addFormDiv').hide();
+		$('#addButton').show();
+		console.log('cancel post1\n');
+	});
+
+
+
+
+	$('#celebrityAddButton').click(function(){
+
+		console.log('start post1\n');
+		$.ajax({
+			url:'/addcelebrity1',
+			type: 'post',
+			data: {
+				newCelebrityName: $('#celebrityInput').val()
+			},
+			success: function(data){
+
+   				$('.alert-success1').html(data).show();
+   				$('.alert-success1').html(data).fadeOut(4000);
+				$("#celebrityListId").load(location.href + " #celebrityListId");
+   			// 	$("#celebrityList").load(location.href + "#celebrityList")
+   			// 	$("#celebrityList").load(location.href+"#celebrityList")
+
+			}
+		});
+});
+
+
+				// alert(data)
+				// $('.alert').hide();
+
+
+   				// $("#celebrityList").load(location.href + " #celebrityList");
+// $('#celebrityinput').post('/addcelebrity',{})
+
+
+</script>
+
+
+
+
+<!-- post 新添加的celebrity -->
 
 </body>
 </html>

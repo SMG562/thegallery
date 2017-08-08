@@ -20,10 +20,10 @@ var mysql = require("mysql");
 
 // First you need to create a connection to the db
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: '' ,
-  database: "celeBrand"
+  host: "45.32.103.71",
+  user: "liuhan213",
+  password: "Superhard213!",
+  database: "thegallery"
 
 });
 

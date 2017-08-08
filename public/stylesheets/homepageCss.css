@@ -48,13 +48,19 @@ text-align: center;
 
 }
 .celebrityList {
-margin-top: 50px;
-text-align: center;
+	margin-top: 50px;
+	text-align: center;
 }
 
 .celebrity-brand-list{
 	text-align: left;
 	margin-top: 50px;
+}
+
+.celebrityNameTitle{
+	text-align: center;
+/*	width:400px;*/
+
 }
 
 .labelList1 a{
@@ -72,8 +78,98 @@ text-align: center;
 footer{
 	margin-top: 30px;
 	text-align: right;
-	color:grey;
+	color: gray;
 	display: none;
 }
+
+#addArea{
+/*	height:30px;
+	width:60px;	*/
+	text-align:right;
+	vertical-align: center;
+
+}
+
+#addAreaFull{
+margin-top: 30px;
+
+
+}
+
+#celebrityinput,#esseyInput,#urlInput {
+	margin-bottom: 10px;
+}
+
+#addForm{
+
+
+		width: 200px;
+
+}
+
+#addFormDiv{
+
+	position: absolute;
+	right: 150px;
+
+/*	right:15px;*/
+	width:220px;
+	height: 200px;
+	border: 1px solid #f6f6f6;
+
+}
+
+#addFormDiv1{
+
+	position: absolute;
+
+	right: 150px;
+	top:150px;
+
+/*	right:15px;*/
+	width:220px;
+	height: 250px;
+	border: 1px solid #f6f6f6;
+
+}
+
+#addButton{
+	cursor:pointer;
+	text-decoration:none;
+}
+
+#cancelAdd{
+	vertical-align:bottom;
+	margin-left:2px;
+}
+
+.alert{
+	color: blue;
+	text-align: center;
+}
+
+#login_register{
+/*		vertical-align: middle;
+		text-align: center;*/
+/*		position: absolute;*/
+/*    	top: 50%;*/
+
+/*		line-height: 300%;*/
+/*		line-height: 300%;*/
+
+            line-height:300%;
+
+
+
+
+
+
+}
+
+}
+
+
+
+
 
 

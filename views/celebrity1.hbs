@@ -1,0 +1,153 @@
+<html>
+<head>
+	{{>head}}
+</head>
+
+<body >
+	<div class="container">
+		<!-- this part is navigation -->
+		<nav class="navbar"> <!-- navbar-fixed-top -->
+			<div class='container '> <!-- //page-header -->
+
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				     </button>
+					 <a class="navbar-brand " href="/"  >  &nbsp  The Gallery </a>
+				</div>
+
+				<div class="navbar-collapse collapse">
+				     	<ul class="nav navbar-nav">
+					        <li id = 'celebrity'><a href="/celebrity">people</a></li>
+<!-- 					        <li><a href="/brand">brand</a></li> -->
+				     	</ul>
+				    	 <form class="navbar-form navbar-right">
+				        	<input type="text" class="form-control" placeholder="搜索...">
+				     	</form>
+	    		</div>
+
+			</div>
+		</nav>
+		<hr/>
+
+		<!-- this part is celebrity list -->
+		<div class = "row">
+			<div class="col-md-2 col-lg-2">
+
+			</div>
+			<div class="col-md-8 col-lg-8">
+
+				<div class="celebrityNameTitle" id = "{{theCelebrityId}}">
+					{{#with celeSBrand.[0]}}
+						<h3>{{celebrityName}}</h3>
+					{{/with}}
+				</div>
+			</div>
+			<div class="col-md-2 col-lg-2">
+				<div id="addArea">
+					<a id="addButton">添加</a>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="addFormDiv" style="display: none">
+			<form id="addForm" class="container">
+				<div  id="addAreaFull" class = "form-group">
+					 <input type="text" class="form-control" id="esseyInput" placeholder="起个标题：">
+					 <input type="text" class="form-control" id="urlInput" placeholder="http 链接：">
+					  <a type="submit" class="btn btn-default form-control" id="celebrityAddButton" >  添加 </a>
+					  <a type="submit" class="btn btn-link form-control" id="cancleAdd1">取消</a>
+
+					  <div class="alert alert-danger form-control" style="display: none"></div>
+  					  <div class="alert alert-success1" style="display: none"></div>
+				</div>
+
+			</form>
+
+		</div>
+
+
+		<div class="container ">
+			<div id ="brandList1" class="celebrityList">
+
+				{{#each celeSBrand}}
+				<p><a class="celebrityTitleClass" id ="{{cele}}" href="http://{{essey_url}}">
+				{{brandName}}
+				</a></p>
+				{{/each}}
+
+			</div>
+
+		</div>
+
+
+		{{>footer}}
+
+	</div>
+
+
+<script>
+
+$(".celebrityList").click(function(){
+
+	essey_url=$(this).attr('href');
+
+	$(this).attr('href',essey_url);
+})
+
+</script>
+
+<script>
+
+
+	$('#addButton').click(function(){
+		$(this).hide();
+		$('#addFormDiv').show();
+
+	})
+
+// 取消添加celebrity
+	$('#cancleAdd1').click(function(){
+		$('#addFormDiv').hide();
+		$('#addButton').show();
+
+		console.log('cancel post1\n');
+	});
+
+
+
+
+	$('#celebrityAddButton').click(function(){
+
+		var s1 = $('.celebrityNameTitle').attr('id');
+		console.log('4. get the celebrity ID in the fornt end.' );
+		console.log(s1);
+		console.log('start post1\n');
+
+		$.ajax({
+			url:'/addEssey',
+			type: 'post',
+			data: {
+				esseyInput: $('#esseyInput').val(),
+				urlInput: $('#urlInput').val(),
+				celebrityId: s1
+			},
+			success: function(data){
+   				$('.alert-success1').html(data).show();
+   				$('.alert-success1').html(data).fadeOut(4000);
+				$("#brandList1").load(location.href + " #brandList1");
+   				console.log('post success');
+			}
+		});
+	});
+
+
+</script>
+
+
+</body>
+</html>

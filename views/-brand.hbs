@@ -1,0 +1,160 @@
+<html>
+<head>
+	{{>head}}
+</head>
+
+<body >
+	<div class="container">
+		<nav class="navbar"> <!-- navbar-fixed-top -->
+			<div class='container '> <!-- //page-header -->
+
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				     </button>
+					 <a class="navbar-brand " href="./"  >  &nbsp Celebrity and Brand </a>
+				</div>
+
+				<div class="navbar-collapse collapse">
+				     	<ul class="nav navbar-nav">
+					        <li id="celebrity"><a href="./celebrity">celebrity</a></li>
+					        <li id="brand"><a href="./brand">brand</a></li>
+				     	</ul>
+				    	 <form class="navbar-form navbar-right" action="/search" method="post">
+				        	<input class="form-control" type="text" name="search_people" placeholder="搜索...">
+				     	</form>
+	    		</div>
+
+			</div>
+		</nav>
+		<hr/>
+
+
+		<div id="addArea">
+			<a id="addButton">addone</a>
+			<div class="alert alert-danger1" style="display: none;"></div>
+  			<div class="alert alert-success1" style="display: none;"></div>
+		</div>
+
+
+		<div class="container">
+			<div id="brandList1" class="brandList">
+				{{#each brandGroup}}
+				<p><a id ="{{id}}" class="brandListOne">{{brandName}}</a></p>
+				{{/each}}
+			</div>
+		</div>
+
+	</div>
+
+<!-- 点击brand名称，跳转至brand页 -->
+  	<script>
+	$('.brandListOne').click(function(){
+
+		var brandId = $(this).attr('id');
+		console.log('start jump to brandId :');	
+		console.log(brandId);	
+		//更改对象的属性
+		// $(obj).attr('href','./OneCelebrity');		
+		$(this).attr('href', './brand/'+brandId);
+	});
+
+
+	</script>
+
+
+	<script>
+
+$('#addButton').click(function(){
+	$('#addButton').hide();
+
+	form = $("<form></form>");
+	form.attr('action','/addcelebrity');
+	form.attr('method','post');
+	form.attr('id','postBrandForm');
+	form.attr('class','form-inline');
+
+	div1= $("<div></div>");
+	// div1.attr('class','form-group ');
+	div1.attr('class','input-group');
+	// input0 = $("<input type='text' name='input1' />");
+	// input0.attr('value','input11 value');
+	var input1 = $("<input type='text' class='form-control' id='brandInput' placeholder='brand input'/>");
+	// var input2 = $("<input type='button' class='form-control ' name='postCelebrity' value='add'/>");
+	var span1 = $("<span class='input-group-btn'></span>")
+	// var button1 = $("<button type='button' id ='celebrityAddButton' class='btn btn-default' >Add!</button>");
+	var input2 = $("<input type='button' class='btn btn-default'  id='brandAddButton' value='Add!' />");
+	var input3 = $("<input type='button' class='btn btn-default'  id='cancelAdd' value='Cancel' />");
+
+	span1.append(input2);
+	// span1.append(button1);
+
+	div1.append(input1);
+	div1.append(span1);
+	// div1.append(input2);
+
+	form.append(div1);
+	form.append(input3);
+	// form.append(input1);
+	// form.append(input2);
+	// form.append(input3);
+	// form.appendTo("#addArea");
+	$("#addButton").after(form);
+
+	
+
+// 取消添加celebrity
+	$('#cancelAdd').click(function(){
+		$('#postBrandForm').remove();
+		$('#addButton').show();
+		console.log('cancel post1\n');
+	});
+
+
+
+	$('#brandAddButton').click(function(){
+
+		console.log('start post1\n');
+
+		var brandLength = $('#brandInput').val();
+		console.log('长度是0');
+		console.log(brandLength.length);
+
+
+		if(brandLength.length ===0){
+			console.log('不能为空');
+			$('.alert').hide();
+			$('.alert-danger1').html('不能为空').show();
+			$('.alert-danger1').html('不能为空').fadeOut(2000);	
+			return false;		
+		};
+
+		$.ajax({
+			url:'/addbrand',
+			type: 'post',
+			data: {
+				newBrandName: $('#brandInput').val()
+			},
+			success:function(data){
+				$('.alert').hide();
+   				$('.alert-danger1').html(data).show();
+   				$('.alert-danger1').html(data).fadeOut(2000);
+   				// $('#brandList1').fadeIn();
+   				$("#brandList1").load(location.href + " #brandList1");
+
+			}
+
+		});
+
+
+		console.log('post brand success');
+	});
+
+});
+
+</script>
+</body>
+</html>
